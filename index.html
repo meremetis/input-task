@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/index.css" />
+    <title>Task</title>
+  </head>
+  <body>
+    <div class="form-wrapper">
+      <form>
+        <h1 class="main-title">Form</h1>
+
+        <div class="input-number-container">
+          <label for="numberInput"><strong>Number</strong></label>
+          <input
+            id="numberInput"
+            pattern="^[1-9][0-9]*$"
+            class="input-number"
+            min="11"
+            type="number"
+            placeholder="Please enter a number"
+          />
+          <span
+            class="error-message"
+            id="error-message"
+            style="color: red; display: none"
+            >Please enter a number greater than 10.</span
+          >
+        </div>
+
+        <div class="button-wrapper">
+          <button
+            id="submitButton"
+            class="submit-button"
+            type="submit"
+            disabled
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      const submitButtonEle = document.getElementById(submitButton);
+      const numberInput = document.getElementById("numberInput");
+      const errorMessage = document.getElementById("error-message");
+
+      numberInput.addEventListener("input", function () {
+        const value = parseInt(this.value, 10);
+
+        if (isNumberGreaterThan10(this.value)) {
+          errorMessage.style.display = "inline";
+          return;
+        }
+
+        hideErrorMessage();
+      });
+
+      numberInput.addEventListener("blur", function () {
+        const value = parseInt(this.value, 10);
+
+        if (isNumberGreaterThan10(this.value)) {
+          this.value = "";
+          hideErrorMessage();
+        }
+      });
+
+      function isNumberGreaterThan10(value) {
+        return isNaN(value) || value < 11;
+      }
+
+      function hideErrorMessage() {
+        errorMessage.style.display = "none";
+      }
+    </script>
+  </body>
+</html>
